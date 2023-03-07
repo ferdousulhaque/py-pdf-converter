@@ -12,6 +12,9 @@ COPY requirements.txt ./
 # Install the requirements specified in file using RUN
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Java
+RUN apt install openjdk-17-jdk
+
 # copy all items in current local directory (source) to current container directory (destination)
 COPY . .
 
