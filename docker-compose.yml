@@ -1,0 +1,15 @@
+version: "3.6"
+
+services:
+    pdf:
+        container_name: pdf_converter
+        ports:
+            - 8000:8000
+        build:
+            context: ./
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "200k"
+                max-file: "3"
+        working_dir: /usr/src/app

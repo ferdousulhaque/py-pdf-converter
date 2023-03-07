@@ -40,11 +40,10 @@ async def main():
 
 @app.post("/pdf-converter")
 async def converter(file: UploadFile, type: str):
-    random_filename = str(uuid.uuid4())+".csv"
-    tabula.convert_into(file.file, "output/"+random_filename, output_format="csv", pages='all')
-    return FileResponse("output/"+random_filename)
-
+    random_filename = str(uuid.uuid4()) + ".csv"
+    tabula.convert_into(file.file, "output/" + random_filename, output_format="csv", pages='all')
+    return FileResponse("output/" + random_filename, 200, None, None, None, file.filename + ".csv")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    uvicorn.run(app)
+    uvicorn.run(app, host='0.0.0.0')

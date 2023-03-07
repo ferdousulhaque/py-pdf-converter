@@ -11,3 +11,10 @@ I have used the following packages of python to build
 
 ### Suggestions
 Please do mail me for any suggestions, I will be glad to include [ferdousul.haque@gmail.com](ferdousul.haque@gmail.com)
+
+### Create Virtual Environment for the Project
+Run the following command to run the virtual environment for python
+
+```bash
+python -m venv ./venv
+```
