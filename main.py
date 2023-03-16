@@ -33,6 +33,10 @@ async def main():
 <input name="file" type="file" accept="application/pdf">
 <input type="submit">
 </form>
+<form action="/pdf-converter?type=xls" enctype="multipart/form-data" method="post">
+<input name="file" type="file" accept="application/pdf">
+<input type="submit">
+</form>
 </body>
     """
     return HTMLResponse(content=content)
@@ -40,9 +44,16 @@ async def main():
 
 @app.post("/pdf-converter")
 async def converter(file: UploadFile, type: str):
-    random_filename = str(uuid.uuid4()) + ".csv"
-    tabula.convert_into(file.file, "output/" + random_filename, output_format="csv", pages='all')
-    return FileResponse("output/" + random_filename, 200, None, None, None, file.filename + ".csv")
+    if type == 'csv':
+        random_filename = str(uuid.uuid4()) + ".csv"
+        tabula.convert_into(file.file, "output/" + random_filename, output_format="csv", pages='all')
+        return FileResponse("output/" + random_filename, 200, None, None, None, file.filename + ".csv")
+    elif type == 'xls':
+        random_filename = str(uuid.uuid4()) + ".xls"
+        df = tabula.read_pdf(file.file, pages='all')[0]
+        df.head()
+        df.to_excel("output/" + random_filename)
+        return FileResponse("output/" + random_filename, 200, None, None, None, file.filename + ".xls")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
