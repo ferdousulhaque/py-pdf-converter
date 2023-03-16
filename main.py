@@ -29,10 +29,12 @@ app = FastAPI()
 async def main():
     content = """
 <body>
+<h3>PDF to CSV Converter</h3>
 <form action="/pdf-converter?type=csv" enctype="multipart/form-data" method="post">
 <input name="file" type="file" accept="application/pdf">
 <input type="submit">
 </form>
+<h3>PDF to Excel Converter</h3>
 <form action="/pdf-converter?type=xls" enctype="multipart/form-data" method="post">
 <input name="file" type="file" accept="application/pdf">
 <input type="submit">
